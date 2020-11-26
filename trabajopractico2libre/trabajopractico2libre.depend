@@ -1,0 +1,68 @@
+# depslib dependency file v1.0
+1602093278 source:c:\users\usuario\desktop\trabajopractico2libre\empleados.c
+	"empleados.h"
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"validaciones.h"
+
+1602093316 c:\users\usuario\desktop\trabajopractico2libre\empleados.h
+
+1601872352 c:\users\usuario\desktop\trabajopractico2libre\validaciones.h
+
+1602093278 source:c:\users\usuario\desktop\trabajopractico2libre\main.c
+	<stdio.h>
+	<stdlib.h>
+	"empleados.h"
+	"validaciones.h"
+
+1602093153 source:c:\users\usuario\desktop\trabajopractico2libre\validaciones.c
+
+1602093278 source:c:\users\usuario\desktop\ejercicio7\vectores4\trabajopractico2libre\empleados.c
+	"empleados.h"
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"validaciones.h"
+
+1602093316 c:\users\usuario\desktop\ejercicio7\vectores4\trabajopractico2libre\empleados.h
+
+1601872352 c:\users\usuario\desktop\ejercicio7\vectores4\trabajopractico2libre\validaciones.h
+
+1602892888 source:c:\users\usuario\desktop\ejercicio7\vectores4\trabajopractico2libre\main.c
+	<stdio.h>
+	<stdlib.h>
+	"empleados.h"
+	"validaciones.h"
+
+1603407653 source:c:\users\usuario\desktop\ejercicio7\vectores4\trabajopractico2libre\validaciones.c
+	"validaciones.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1605123467 source:c:\users\usuario\desktop\programacion\ejercicio7\vectores4\trabajopractico2libre\empleados.c
+	"empleados.h"
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"validaciones.h"
+
+1605117523 c:\users\usuario\desktop\programacion\ejercicio7\vectores4\trabajopractico2libre\empleados.h
+
+1605115816 c:\users\usuario\desktop\programacion\ejercicio7\vectores4\trabajopractico2libre\validaciones.h
+
+1605123769 source:c:\users\usuario\desktop\programacion\ejercicio7\vectores4\trabajopractico2libre\main.c
+	<stdio.h>
+	<stdlib.h>
+	"empleados.h"
+	"validaciones.h"
+
+1605115816 source:c:\users\usuario\desktop\programacion\ejercicio7\vectores4\trabajopractico2libre\validaciones.c
+	"validaciones.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+

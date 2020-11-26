@@ -1,174 +1,181 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "funciones.h"
+#include "empleados.h"
+#include "validaciones.h"
+
+#define TAM 1000
 
 
-    int main()
+int menuEmpleados();
+
+int main(void)
+{
+
+    eEmployee lista[TAM];
+
+    int id=1000;
+    int sector;
+    int flag1=0;
+    int opcion;
+    int idParametro;
+    char nombre[50];
+    char apellido[50];
+    float salario;
+    char confirma='n';
+
+
+    if(!inicializarEmpleado(lista,TAM))
     {
-        int A;
-        int B;
-        int suma;
-        int resta;
-        int multiplicar;
-        int factorialA;
-        int factorialB;
-        int opcion;
-        int flagOpcion1=0;
-        int flagOpcion2=0;
-        float dividir;
-        char salir='s';
-        char seguir='s';
+        printf("Empleado inicializado con exito");
+    }
 
-     do
-      {
-        printf( "   >>> MENU CALCULADORA <<<\n\n" );
-        printf ("  1.Ingresar primer numero \n");
-        printf ("  2.Ingresar segundo numero \n");
-        printf ("  3.Calcular \n");
-        printf ("  4.Mostrar \n");
-        printf ("  5.Salir \n");
-        fflush(stdin);
-        printf("\n  Seleccione  una opcion: \n");
-         scanf("%d", &opcion);
+    do
+    {
+        system("cls");
+        opcion=menuEmpleados();
+
+        system("cls");
 
         switch(opcion)
         {
-            case 1:
-                    system("cls");
-                    printf("Ingrese el primer numero: \n\n");
-                    scanf("%d", &A);
-                    flagOpcion1=1;
+        case 1:
+            if(buscarEspacioLibre(lista,TAM)!= -1)
+            {
+                printf(" ***ALTA EMPLEADOS***\n\n");
 
-                break;
+                getString(nombre,sizeof(nombre),"Ingrese nombre:\n","ERROR\nIngrese nombre nuevamente:");
+                getString(apellido,sizeof(apellido),"Ingrese apellido:\n","ERROR\nIngrese apellido nuevamente:");
+                salario=getFloat("Ingrese salario:\n","ERROR\nIngrese salario nuevamente");
+                sector=getInt("Ingrese sector(numero):\n","ERROR\nIngrese sector:");
 
-            case 2:
-                system("cls");
-                   if (flagOpcion1==1)
-                   {
-                        printf("Ingrese el segundo numero: \n\n");
-                        scanf("%d", &B);
-                        flagOpcion2=1;
-
-
-                   } else {
-                            printf("Error , debe ingresar el primer numero\n\n");
-                          }
-
-                break;
-
-            case 3:
-                 system("cls");
-                    if (flagOpcion1==0)
-                    {
-
-                      printf("Error , intente nuevamente\n\n");
-                    }
-
-                     else if(flagOpcion2==1 )
-                      {
-                        suma= SumarNumeros(A,B);
-                        printf("El resultado de A+B es: %d\n", suma);
-
-                        resta= RestarNumeros(A,B);
-                        printf("El resultado de A-B es: %d\n", resta);
-
-                        multiplicar= MultiplicarNumeros(A,B);
-                        printf("El resultado de A*B es: %d\n", multiplicar);
-
-                        dividir= DividirNumeros(A,B);
-                        printf("El resultado de A/B es: %.2f\n", dividir);
-
-                        if (B==0)
-                        {
-                            printf("Error,No es posible dividir por 0.\n");
-                            printf("Ingrese el primer numero: ");
-                            scanf("%d", &A);
-
-                            printf("Ingrese el segundo numero: ");
-                            scanf("%d", &B);
-
-                         }
-                            factorialA= FactorizarNumero(A);
-                            factorialB= FactorizarNumero(B);
-                            printf("\nEl factorial de %d es %d,el factorial de %d es %d",A, factorialA, B,factorialB);
-
-                        }else
-                           {
-                             printf("Error , debe ingresar los numeros antes de calcular\n\n");
-                            }
-
-                    break;
-
-            case 4:
-                system("cls");
-                if(flagOpcion2==1)
+                if(altaEmpleado(lista,TAM,id,nombre,apellido,salario,sector)!=-1)
                 {
-                    suma= SumarNumeros(A,B);
-                    printf("\nEl resultado de %d+%d es: %d",A, B, suma);
-
-                    resta= RestarNumeros(A,B);
-                    printf("\nEl resultado de %d-%d es: %d",A, B, resta);
-
-                    multiplicar= MultiplicarNumeros( A ,B);
-                    printf("\nEl resultado de %d*%d es: %d",A, B, multiplicar);
-
-                    dividir= DividirNumeros(A,B);
-                    printf("\nEl resultado de %d/%d es: %.2f",A , B, dividir);
-
-                    if(B ==0)
-                    {
-                        printf("Error, No es posible dividir por 0.\n");
-                        printf("Ingrese el primer numero: ");
-                        scanf("%d", &A);
-                        printf("Ingrese el segundo numero: ");
-                        scanf("%d", &B);
-                    }
-
-                    factorialA= FactorizarNumero(A);
-                    factorialB= FactorizarNumero(B);
-                    printf("\nEl factorial de %d es %d,el factorial de %d es %d",A, factorialA, B,factorialB);
-
-
-                    flagOpcion2=0;
-
-
-                   } else{
-                          printf("Error, numeros no ingresados \n\n");
-
-                        }
-                    break;
-
-            case 5:
-                system("cls");
-                printf("Esta seguro que desea salir ? (s/n)\n\n");
-                fflush(stdin);
-                scanf("%c",&salir);
-                salir = tolower(salir);
-
-                if (salir == 's')
-                {
-                    return 0;
+                    printf("\n Alta exitosa!!\n\n");
+                    id++;
+                    flag1=1;
                 }
+                else
+                {
+                    printf("\nError,no se pudo agregar empleado\n\n");
+                }
+            }
+            break;
+        case 2:
+            if(flag1)
+            {
+                printf("*******MODIFICAR  EMPLEADO*********\n\n");
+                mostrarEmpleados(lista,TAM);
+                idParametro=getInt("Ingrese el ID del empleado que desea modificar:\n","ERROR\nIngrese ID nuevamente:");
+                if(modificarEmpleado(lista,TAM,idParametro))
+                {
+                    printf("\nModificacion exitosa!!...");
 
-                    break;
+                }
+                else
+                {
 
-             default:
-                    system("cls");
-                    printf("Opcion incorrecta\n\n");
+                    printf("Problemas al modificar empleado..");
+                }
+            }
 
-                    break;
+         break;
+        case 3:
+            if(flag1)
+            {
+                printf("*******BAJA EMPLEADO*******\n\n");
+                mostrarEmpleados(lista,TAM);
+                idParametro=getInt("Ingrese ID del empleado que desea dar de baja:","ERROR\n Ingrese el ID nuevamente:");
+                if(bajaEmpleado(lista,TAM,idParametro))
+                {
 
+                    printf("\nBaja exitosa!!...");
 
-           }
+                }
+                else
+                {
 
-            system("pause");
+                    printf("Problemas al dar de baja el empleado..");
+                }
+            }
 
-
-
-        }while(seguir ='s');
-
-         return 0;
+         break;
+        case 4:
+            if(flag1)
+            {
+                informe(lista,TAM);
+            }
+            else
+            {
+                printf("\nError primero debe agregar un empleado\n\n");
+            }
+            break;
+        case 5:
+            confirma=getCharTwoOptions("seguro que desea salir? (s/n)","ERROR\n Ingrese  s o n:",'s','n');
+            break;
+        default:
+            printf("Opcion invalida\n\n");
+            break;
         }
 
+        system("pause");
 
+    }
+    while(confirma=='n');
+
+    system("cls");
+
+    return EXIT_SUCCESS;
+}
+
+int menuEmpleados()
+{
+    int opcion;
+
+    printf("***************MENU DE EMPLEADOS*****************\n\n");
+    printf("1.Agregar empleado\n");
+    printf("2.Modificar empleado\n");
+    printf("3.Baja empleado\n");
+    printf("4.Informe\n");
+    printf("5.Salir\n\n");
+    printf("--------------------------------------------------\n\n");
+    opcion=getInt("Ingrese una opcion : ","\nERROR\nIngrese una opcion valida: ");
+
+    return opcion;
+}
+
+
+char menuModificacion()
+{
+    char opcion;
+
+    system("cls");
+
+    printf("   ***MODIFICATION MENU***\n\n");
+    printf("a.Modificar nombre\n");
+    printf("b.Modificar apellido\n");
+    printf("c.Modificar salario\n");
+    printf("d.Modificar sector\n");
+    printf("_______________________________\n\n");
+    opcion=getChar("Elegir una opcion:","ERROR\nIngrese nuevamente una opcion:");
+
+    return opcion;
+}
+
+
+char menuInforme()
+{
+    char opcion;
+
+    system("cls");
+
+    printf("*******MENU INFORMES*******\n\n");
+    printf("a.Lista de empleados ordenados por nombre y sector\n\n");
+    printf("b.Informe Salario\n\n");
+    printf("c.Salir\n");
+    printf("__________________________________________________________\n\n");
+
+    opcion=getChar("Elegir una opcion:","ERROR\n Ingrese nuevamente una opcion:");
+
+    return opcion;
+}
 
